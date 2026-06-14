@@ -7,21 +7,23 @@
 
 ## 📦 目前進度（MVP 真實狀態）
 
-|元件                   |檔案                               |狀態    |
-|---------------------|---------------------------------|------|
-|設定 / env loader      |`config.py`                      |✅ 可用  |
-|統一 log               |`utils/logger.py`                |✅ 可用  |
-|推播格式（3 種 LOCKED）     |`push/formatter.py`              |✅ 可用  |
-|程式入口                 |`main.py`                        |⛔ 尚未建立|
-|行情 / 掃描 / 篩選 / 評分    |`core/*`                         |⛔ 尚未建立|
-|ML / 回測              |`ml/*`                           |⛔ 尚未建立|
-|推播管道（LINE / Telegram）|`push/telegram.py`、`push/line.py`|⛔ 尚未建立|
-|資料儲存 / git 同步        |`storage/*`                      |⛔ 尚未建立|
-|GitHub Actions 排程    |`.github/workflows/`             |⛔ 尚未建立|
+|元件                   |檔案                                                  |狀態    |
+|---------------------|----------------------------------------------------|------|
+|設定 / env loader      |`config.py`                                         |✅ 可用  |
+|統一 log               |`utils/logger.py`                                   |✅ 可用  |
+|推播格式（3 種 LOCKED）     |`push/formatter.py`                                 |✅ 可用  |
+|程式入口                 |`main.py`                                           |⛔ 尚未建立|
+|資料來源層（市場掃描）          |`core/scanner.py`                                   |✅ 可用  |
+|行情資料層（OHLCV）         |`core/market_data.py`                               |✅ 可用  |
+|篩選 / 評分 / 驗證         |`core/filter.py`、`core/scorer.py`、`core/verifier.py`|⛔ 尚未建立|
+|ML / 回測              |`ml/*`                                              |⛔ 尚未建立|
+|推播管道（LINE / Telegram）|`push/telegram.py`、`push/line.py`                   |⛔ 尚未建立|
+|資料儲存 / git 同步        |`storage/*`                                         |⛔ 尚未建立|
+|GitHub Actions 排程    |`.github/workflows/`                                |⛔ 尚未建立|
 
 
 > 因此目前**沒有端到端執行**（無 `main.py`、無排程、不會實際推播）。
-> 現在唯一可執行的，是匯入並使用上述三個基礎模組。
+> 現在可執行的，是匯入並使用基礎模組（config / logger / formatter）、資料來源層 `core/scanner.py`（mock 市場清單）與行情資料層 `core/market_data.py`（mock OHLCV）——兩者皆**不做任何判斷**。
 
 -----
 
@@ -65,6 +67,22 @@ config.normalize_mode("garbage")  # -> ('morning', True)
 from utils.logger import get_logger
 log = get_logger("main")
 log.info("hello")                 # -> [main] hello
+```
+
+```python
+# 4) 市場資料來源層（mock，回傳 list[dict]，不做任何判斷）
+from core.scanner import fetch_universe
+stocks = fetch_universe()
+print(len(stocks), stocks[0])
+# -> 15 {'name': '台積電', 'code': '2330', 'price': 1180.0, ...}
+```
+
+```python
+# 5) 行情資料層（mock OHLCV，code -> dict，不做任何判斷）
+from core.market_data import fetch_market_data
+data = fetch_market_data(["2330", "2454"])
+print(data["2330"])
+# -> {'close': <float>, 'high': <float>, 'low': <float>, 'volume': <int>}
 ```
 
 > 端到端入口 `python main.py` **尚未建立**。
