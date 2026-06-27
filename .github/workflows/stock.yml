@@ -1,0 +1,59 @@
+name: 台股 AI 選股系統
+
+on:
+  schedule:
+    - cron: "0 1 * * 1-5"    # 台灣 09:00 morning（週一至週五）
+    - cron: "45 6 * * 1-4"   # 台灣 14:45 verify（週一至週四）
+    - cron: "50 6 * * 5"     # 台灣 14:50 weekly（週五）
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "執行模式"
+        required: true
+        default: "test"
+        type: choice
+        options: [morning, verify, weekly, test]
+
+permissions:
+  contents: write   # 允許 commit db.json / history.csv / model.pkl 回 repo
+
+concurrency:
+  group: ai-stock-bot
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Resolve MODE
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "MODE=${{ github.event.inputs.mode }}" >> "$GITHUB_ENV"
+          else
+            case "${{ github.event.schedule }}" in
+              "0 1 * * 1-5")  echo "MODE=morning" >> "$GITHUB_ENV" ;;
+              "45 6 * * 1-4") echo "MODE=verify"  >> "$GITHUB_ENV" ;;
+              "50 6 * * 5")   echo "MODE=weekly"  >> "$GITHUB_ENV" ;;
+              *)              echo "MODE=morning" >> "$GITHUB_ENV" ;;
+            esac
+          fi
+
+      - name: Run
+        env:
+          LINE_TOKEN: ${{ secrets.LINE_TOKEN }}
+          LINE_ID: ${{ secrets.LINE_ID }}
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}
+        run: python main.py
