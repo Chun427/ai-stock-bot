@@ -1,1 +1,51 @@
-{}
+{
+  "PRED_2026-06-29": {
+    "date": "2026-06-29",
+    "spy": -0.04716574175711585,
+    "qqq": -1.3763624451209266,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "彩晶",
+        "code": "6116",
+        "price": 19.45,
+        "ticker": "6116.TW",
+        "winrate": 53.3,
+        "label": null
+      },
+      {
+        "name": "群創",
+        "code": "3481",
+        "price": 67.6,
+        "ticker": "3481.TW",
+        "winrate": 48.5,
+        "label": null
+      },
+      {
+        "name": "承啟",
+        "code": "2425",
+        "price": 41.6,
+        "ticker": "2425.TW",
+        "winrate": 47.1,
+        "label": null
+      },
+      {
+        "name": "同欣電",
+        "code": "6271",
+        "price": 243.0,
+        "ticker": "6271.TW",
+        "winrate": 46.9,
+        "label": null
+      },
+      {
+        "name": "蔚華科",
+        "code": "3055",
+        "price": 105.5,
+        "ticker": "3055.TW",
+        "winrate": 56.5,
+        "label": null
+      }
+    ],
+    "verified": false
+  }
+}
