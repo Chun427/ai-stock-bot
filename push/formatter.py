@@ -20,6 +20,10 @@ VERIFY_TOP_BORDER = True
 LP, RP = "(", ")"
 # #4 是否在訊息內含「【收盤驗證】」標題（使用者=否，視為區段標籤）
 VERIFY_INNER_HEADER = ""   # 留空＝不含；若要顯示填 "【收盤驗證】"
+# #5 ML 回測報告標題（GPT 監督更新：乾淨化，移除 TimeSeriesSplit 字樣）
+HEADER_ML_BACKTEST = "【ML 回測報告】"
+# #6 早盤是否顯示 ML 分數 🤖（GPT 鎖死版=不顯示；與更早的 🤖9.9 螢幕衝突，待確認）
+MORNING_SHOW_ML = False
 # ─────────────────────────────────────────────────────────
 
 BAR = "━" * 14
@@ -47,18 +51,13 @@ def morning(date_slash: str, spy: float, qqq: float,
         f"📅 今日預測 {date_slash}",
         f"🌍 SPY {spy:+.2f}% | QQQ {qqq:+.2f}%",
         BAR,
-        "",
     ]
     for i, s in enumerate(stocks):
-        head = f"{_rank(i)} {s['name']} {s['code']} 💰{s['price']:.2f}"
+        lines.append(f"{_rank(i)} {s['name']} {s['code']} 💰{s['price']:.2f}")
         stat = f"📈 勝率 {s['winrate']:.1f}% | 預測 {s['gain']:+.2f}%"
-        if s.get("ml") is not None:
+        if MORNING_SHOW_ML and s.get("ml") is not None:
             stat += f" 🤖{s['ml']:.1f}"
-        lines.append(head)
         lines.append(stat)
-        lines.append("")
-    if lines and lines[-1] == "":
-        lines.pop()
     lines.append(BAR)
     lines.append(f"📌 收盤後自動驗證{LP}掃描全市場 {scanner_count} 檔{RP}")
     return "\n".join(lines)
@@ -159,20 +158,15 @@ def weekly_summary(date_dash: str, hits: int, total: int) -> str:
 # 週五 ML 回測報告（契約指定格式）
 # ============================================================
 def ml_backtest(n_samples: int, base_winrate: float, avg_acc: float,
-                avg_auc: float, feat_importance: dict) -> str:
-    feats = " | ".join(
-        f"{k}:{v:.2f}"
-        for k, v in sorted(feat_importance.items(), key=lambda x: -x[1])
-    )
+                avg_auc: float) -> str:
+    """USER LAYER：僅呈現乾淨指標，禁止 ML 術語/特徵重要性/CV 細節。"""
     return "\n".join([
-        f"📊 ML 回測報告{LP}TimeSeriesSplit×5{RP}",
+        HEADER_ML_BACKTEST,
         BAR,
         f"樣本總數:{n_samples} 筆",
         f"基準勝率{LP}真實{RP}:{base_winrate:.1f}%",
         f"平均準確率:{avg_acc:.1f}%",
         f"平均 AUC:{avg_auc:.1f}%",
-        "特徵重要性:",
-        feats,
         BAR,
     ])
 
