@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: "0 1 * * 1-5"    # 台灣 09:00 morning（週一至週五）
     - cron: "45 6 * * 1-4"   # 台灣 14:45 verify（週一至週四）
-    - cron: "50 6 * * 5"     # 台灣 14:50 weekly（週五）
+    - cron: "0 12 * * 5"     # 台灣 20:00 weekly（週五盤後）
   workflow_dispatch:
     inputs:
       mode:
@@ -42,12 +42,8 @@ jobs:
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "MODE=${{ github.event.inputs.mode }}" >> "$GITHUB_ENV"
           else
-            case "${{ github.event.schedule }}" in
-              "0 1 * * 1-5")  echo "MODE=morning" >> "$GITHUB_ENV" ;;
-              "45 6 * * 1-4") echo "MODE=verify"  >> "$GITHUB_ENV" ;;
-              "50 6 * * 5")   echo "MODE=weekly"  >> "$GITHUB_ENV" ;;
-              *)              echo "MODE=morning" >> "$GITHUB_ENV" ;;
-            esac
+            # 單一時間控制中心：MODE 由 scheduler.py 解析（schedule→MODE 唯一定義處）
+            echo "MODE=$(python scheduler.py "${{ github.event.schedule }}")" >> "$GITHUB_ENV"
           fi
 
       - name: Run
