@@ -21,9 +21,10 @@ TG_TOKEN = _env("TG_TOKEN")
 TG_CHAT = _env("TG_CHAT")
 
 # MODE 白名單，非法值 fallback 為 morning（確保不靜默終止）
-_VALID_MODES = {"morning", "verify", "weekly", "test"}
-_raw_mode = _env("MODE", "morning")
-MODE = _raw_mode if _raw_mode in _VALID_MODES else "morning"
+# 單一來源：由 scheduler.py 定義（避免雙頭維護）
+from scheduler import VALID_MODES as _VALID_MODES, FALLBACK_MODE as _FALLBACK
+_raw_mode = _env("MODE", _FALLBACK)
+MODE = _raw_mode if _raw_mode in _VALID_MODES else _FALLBACK
 MODE_FALLBACK_USED = _raw_mode not in _VALID_MODES
 
 # ============================================================

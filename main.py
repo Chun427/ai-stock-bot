@@ -159,9 +159,10 @@ def run_weekly():
     trainer.train()
     metrics = backtest.run()
     if metrics:
+        # USER LAYER：僅推乾淨指標；特徵重要性/CV 已於 backtest 記入 MODEL log
         push_all(formatter.ml_backtest(
             metrics["n_samples"], metrics["base_winrate"],
-            metrics["avg_acc"], metrics["avg_auc"], metrics["feat_importance"],
+            metrics["avg_acc"], metrics["avg_auc"],
         ))
     else:
         log.info("樣本不足，本週不推播 ML 回測報告")

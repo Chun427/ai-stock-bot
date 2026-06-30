@@ -38,6 +38,7 @@ MODE 由 workflow 依 cron 寫入 `$GITHUB_ENV`；非白名單值 Python 端 fal
 - 特徵：rsi, vx, chg, ma20_diff, hi_lo_pos, weekday
 - 最低訓練門檻 30 筆有標籤樣本；不足時純 Rule-based，推播不中斷
 - 週五 TimeSeriesSplit×5 回測（no shuffle，防未來資料洩露）
+- 三層輸出：USER（乾淨推播）/ MODEL（特徵重要性・CV・training log，僅記 log）/ DEBUG（error・raw）。投資者推播不含任何 ML 術語
 
 ## 檔案結構
 
