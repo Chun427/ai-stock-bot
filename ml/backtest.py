@@ -70,6 +70,17 @@ def run():
             f: round(float(imp), 2)
             for f, imp in zip(config.ML_FEATURES, last_clf.feature_importances_)
         }
+
+        # ── MODEL LAYER（僅記 log，禁止推播給投資者）──
+        log.info("[MODEL] TimeSeriesSplit×5 完成")
+        log.info(f"[MODEL] per-fold acc = {[round(a, 3) for a in accs]}")
+        log.info(f"[MODEL] per-fold auc = {[round(a, 3) for a in aucs]}")
+        imp_str = " | ".join(
+            f"{k}:{v:.2f}"
+            for k, v in sorted(importance.items(), key=lambda x: -x[1])
+        )
+        log.info(f"[MODEL] feature_importance = {imp_str}")
+
         return {
             "n_samples": n,
             "base_winrate": round(float(np.mean(y)) * 100, 1),
