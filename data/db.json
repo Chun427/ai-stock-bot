@@ -47,5 +47,46 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-06-30": {
+    "date": "2026-06-30",
+    "spy": 1.1750057250389023,
+    "qqq": 2.4854210883145544,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "正達",
+        "code": "3149",
+        "price": 101.0,
+        "ticker": "3149.TW",
+        "winrate": 59.5,
+        "label": null
+      },
+      {
+        "name": "展宇",
+        "code": "1776",
+        "price": 20.2,
+        "ticker": "1776.TW",
+        "winrate": 45.7,
+        "label": null
+      },
+      {
+        "name": "同欣電",
+        "code": "6271",
+        "price": 267.0,
+        "ticker": "6271.TW",
+        "winrate": 43.8,
+        "label": null
+      },
+      {
+        "name": "臻鼎-KY",
+        "code": "4958",
+        "price": 630.0,
+        "ticker": "4958.TW",
+        "winrate": 43.2,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
