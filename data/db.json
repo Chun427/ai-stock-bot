@@ -88,5 +88,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-01": {
+    "date": "2026-07-01",
+    "spy": 0.7920198981480553,
+    "qqq": 1.7014704222517052,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "祥碩",
+        "code": "5269",
+        "price": 1490.0,
+        "ticker": "5269.TW",
+        "winrate": 40.0,
+        "label": null
+      },
+      {
+        "name": "兆豐金",
+        "code": "2886",
+        "price": 46.4,
+        "ticker": "2886.TW",
+        "winrate": 38.5,
+        "label": null
+      },
+      {
+        "name": "安普新",
+        "code": "6743",
+        "price": 31.9,
+        "ticker": "6743.TW",
+        "winrate": 37.0,
+        "label": null
+      },
+      {
+        "name": "洋基工程",
+        "code": "6691",
+        "price": 757.0,
+        "ticker": "6691.TW",
+        "winrate": 43.5,
+        "label": null
+      },
+      {
+        "name": "威宏-KY",
+        "code": "8442",
+        "price": 42.25,
+        "ticker": "8442.TW",
+        "winrate": 66.7,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
