@@ -12,7 +12,7 @@ on:
         required: true
         default: "test"
         type: choice
-        options: [morning, verify, weekly, test]
+        options: [morning, verify, weekly, test, backtest]
 
 permissions:
   contents: write   # 允許 commit db.json / history.csv / model.pkl 回 repo
@@ -37,14 +37,11 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Resolve MODE
+      - name: Resolve MODE (single source = scheduler.py)
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "MODE=${{ github.event.inputs.mode }}" >> "$GITHUB_ENV"
-          else
-            # 單一時間控制中心：MODE 由 scheduler.py 解析（schedule→MODE 唯一定義處）
-            echo "MODE=$(python scheduler.py "${{ github.event.schedule }}")" >> "$GITHUB_ENV"
-          fi
+          MODE=$(python scheduler.py "${{ github.event.schedule }}" "${{ github.event.inputs.mode }}")
+          echo "MODE=$MODE" >> "$GITHUB_ENV"
+          echo "解析結果 MODE=$MODE（來源：scheduler.py 唯一定義）"
 
       - name: Run
         env:
