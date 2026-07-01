@@ -1,10 +1,17 @@
 name: 台股 AI 選股系統
 
 on:
+  # ✅ 主要：外部準時觸發（cron-job.org 等於 09:00 打 API）
+  repository_dispatch:
+    types: [morning_run, verify_run, weekly_run]
+
+  # ✅ 備援：GitHub cron（平台會延遲，僅作 fallback）
   schedule:
     - cron: "0 1 * * 1-5"    # 台灣 09:00 morning（週一至週五）
     - cron: "45 6 * * 1-4"   # 台灣 14:45 verify（週一至週四）
     - cron: "0 12 * * 5"     # 台灣 20:00 weekly（週五盤後）
+
+  # 手動測試
   workflow_dispatch:
     inputs:
       mode:
@@ -39,9 +46,9 @@ jobs:
 
       - name: Resolve MODE (single source = scheduler.py)
         run: |
-          MODE=$(python scheduler.py "${{ github.event.schedule }}" "${{ github.event.inputs.mode }}")
+          MODE=$(python scheduler.py "${{ github.event.schedule }}" "${{ github.event.inputs.mode }}" "${{ github.event.action }}")
           echo "MODE=$MODE" >> "$GITHUB_ENV"
-          echo "解析結果 MODE=$MODE（來源：scheduler.py 唯一定義）"
+          echo "event=${{ github.event_name }} action=${{ github.event.action }} → MODE=$MODE（scheduler.py 唯一定義）"
 
       - name: Run
         env:
