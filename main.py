@@ -172,6 +172,32 @@ def run_weekly():
 
 
 # ============================================================
+# MODE: backtest（投資有效性驗證；離線分析，不推播）
+# ============================================================
+def run_backtest():
+    from core import universe
+    from ml import backtest_engine
+    REPORT["mode"] = "backtest"
+    codes = universe.backtest_universe()
+    panel, index_series = backtest_engine.load_panel(codes)
+    REPORT["scanner"] = len(panel)
+    summary, trades = backtest_engine.run(panel, index_series)
+    if "error" in summary:
+        log.error(summary["error"])
+        REPORT["final"] = 0
+        return
+    csv_path, md_path = backtest_engine.write_outputs(summary, trades)
+    REPORT["final"] = summary["params"]["periods"]
+    log.info(f"模型年化 {summary['model'].get('annualized')}% | "
+             f"指數 {summary['index_buyhold'].get('annualized')}% | "
+             f"隨機 {summary['random'].get('annualized')}% | "
+             f"超額 {summary.get('excess_vs_index_ann_pct')}% | "
+             f"Precision@{config.TOP_N} {summary.get('precision_at_n')}%")
+    log.info(f"CSV：{csv_path}")
+    log.info(f"報告：{md_path}")
+
+
+# ============================================================
 # 狀態回寫
 # ============================================================
 def _sync_state(msg: str, prior: str) -> str:
@@ -201,6 +227,8 @@ def main():
             run_verify()
         elif config.MODE == "weekly":
             run_weekly()
+        elif config.MODE == "backtest":
+            run_backtest()
     except Exception as e:  # noqa: BLE001
         import traceback
         log.error(f"頂層例外：{e}")
@@ -217,4 +245,14 @@ def _print_report():
 
 
 if __name__ == "__main__":
+    import sys
+    # CLI 覆蓋：python main.py --mode backtest（MODE 合法性由 scheduler 單一來源裁定）
+    if "--mode" in sys.argv:
+        import scheduler
+        _i = sys.argv.index("--mode")
+        if _i + 1 < len(sys.argv):
+            _m = sys.argv[_i + 1].strip()
+            config.MODE = _m if scheduler.is_valid_mode(_m) else config.MODE
+            config.MODE_FALLBACK_USED = not scheduler.is_valid_mode(_m)
+            REPORT["mode"] = config.MODE
     main()

@@ -39,9 +39,16 @@ MODEL_PATH = os.path.join(DATA_DIR, "model.pkl")
 # ============================================================
 # 掃描 / 候選池
 # ============================================================
-MAX_CANDIDATES = 230          # 候選池上限
+MAX_CANDIDATES = 230          # 候選池上限（★ 這是「上限/cap」，非實際全市場檔數）
 TOP_N = 5                     # 最終推播檔數
 HISTORY_DAYS = 62             # 個股回測歷史天數
+
+# ── Universe Definition（明確排除規則；預設維持現行行為，改 True 才生效）──
+# 現行 universe = TWSE上市 + TPEx上櫃，4 位數字代號，昨日上漲，依漲幅取前 MAX_CANDIDATES。
+EXCLUDE_ETF = False           # True 則排除 00 開頭 ETF（如 0050/0056/00878）
+EXCLUDE_KY = False            # True 則排除 -KY 外國企業（如 臻鼎-KY 4958）
+# 註：權證/牛熊證（非 4 位數字代號）已天然排除；興櫃不在資料來源內亦排除。
+#     處置股/停牌/全額交割「目前未明確排除」（資料來源未標記），列為已知風險。
 
 # ============================================================
 # 技術濾網
@@ -100,3 +107,21 @@ HISTORY_HEADER = [
     "date", "code", "name", "rsi", "vx", "chg",
     "ma20_diff", "hi_lo_pos", "weekday", "target_label",
 ]
+
+# ============================================================
+# Backtest Mode（投資有效性驗證；功能凍結後唯一新增能力）
+# ============================================================
+# 台股交易成本（單邊比率）— 用於回測淨報酬，避免過度樂觀
+FEE_RATE = 0.001425          # 券商手續費（買、賣各一次）
+TAX_RATE = 0.003             # 證交稅（僅賣出）
+SLIPPAGE = 0.001             # 滑價（買、賣各估一次；可調）
+
+# 回測參數
+BT_HOLD_DAYS = VERIFY_WINDOW # 持有交易日（與線上策略一致＝5）
+BT_TOP_N = TOP_N             # 每期選股數＝5
+BT_YEARS = 4                 # 預設回測年數（抓 yfinance 歷史）
+BT_INDEX_TICKER = "0050.TW"  # 大盤買進持有基準（元大台灣50）
+BT_RANDOM_SEED = 42
+# 回測 universe 來源：優先讀 data/universe.csv（單欄 code），無則用內建代表性清單
+BT_UNIVERSE_CSV = os.path.join(DATA_DIR, "universe.csv")
+BT_OUTPUT_DIR = os.path.join(DATA_DIR, "backtests")

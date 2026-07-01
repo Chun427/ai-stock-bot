@@ -20,7 +20,18 @@ SCHEDULE = {
 }
 
 FALLBACK_MODE = "morning"
-VALID_MODES = set(SCHEDULE.keys()) | {"test"}
+VALID_MODES = set(SCHEDULE.keys()) | {"test", "backtest"}
+
+
+def resolve(schedule_expr: str = "", dispatch_input: str = "") -> str:
+    """唯一 MODE 解析點：手動 dispatch 優先（驗證後），否則由 cron 解析。
+
+    workflow 只呼叫此函式，不再於 bash/yaml 內判斷 MODE。
+    """
+    di = (dispatch_input or "").strip()
+    if di:
+        return di if is_valid_mode(di) else FALLBACK_MODE
+    return resolve_mode(schedule_expr)
 
 
 def resolve_mode(schedule_expr: str) -> str:
@@ -37,6 +48,9 @@ def is_valid_mode(mode: str) -> bool:
 
 
 if __name__ == "__main__":
-    # 供 workflow 呼叫：python scheduler.py "<github.event.schedule>"
+    # workflow 唯一呼叫點：
+    #   python scheduler.py "<github.event.schedule>" "<github.event.inputs.mode>"
     import sys
-    print(resolve_mode(sys.argv[1] if len(sys.argv) > 1 else ""))
+    sched = sys.argv[1] if len(sys.argv) > 1 else ""
+    disp = sys.argv[2] if len(sys.argv) > 2 else ""
+    print(resolve(sched, disp))
