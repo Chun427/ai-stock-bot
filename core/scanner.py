@@ -107,13 +107,24 @@ def _from_tpex():
         return []
 
 
+def _excluded(code: str, name: str) -> bool:
+    """Universe 排除規則（由 config 開關控制；預設全 False＝不改變現行行為）。"""
+    if config.EXCLUDE_ETF and code.startswith("00"):
+        return True
+    if config.EXCLUDE_KY and "KY" in name.upper():
+        return True
+    return False
+
+
 def scan() -> list:
     """整合 TWSE + TPEx，回傳候選池（上限 MAX_CANDIDATES）。"""
     pool = _from_twse() + _from_tpex()
     if not pool:
         log.error("TWSE/TPEx 皆無資料，候選池為空（將觸發 fail-safe 空結果推播）")
         return []
+    pool = [x for x in pool if not _excluded(x["code"], x["name"])]
     pool.sort(key=lambda x: -x["chg"])
-    pool = pool[: config.MAX_CANDIDATES]
-    log.info(f"候選池合計 {len(pool)} 檔")
-    return [{"code": x["code"], "name": x["name"], "market": x["market"]} for x in pool]
+    capped = pool[: config.MAX_CANDIDATES]
+    # 誠實記錄：實際上漲檔數 vs 取用（cap）檔數，便於判斷是否觸頂
+    log.info(f"候選池：上漲 {len(pool)} 檔，取用 {len(capped)} 檔（cap={config.MAX_CANDIDATES}）")
+    return [{"code": x["code"], "name": x["name"], "market": x["market"]} for x in capped]
