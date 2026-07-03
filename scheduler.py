@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
 """
-scheduler.py — 單一時間控制中心（SINGLE SOURCE OF TRUTH）
+scheduler.py — MODE 解析唯一來源（SINGLE SOURCE OF TRUTH）
 ==========================================================
-所有任務的規範時間與「schedule → MODE」對應，只在這裡定義。
-其他 module 與 workflow 一律引用此處，禁止各自寫死時間。
+Production 觸發為 repository_dispatch（外部排程器準時觸發）。
+GitHub cron 已停用（僅保留對應表供 rollback）。
 
-⚠️ 重要事實（不得宣稱誇大）：
-   GitHub Actions 的實際觸發由 GitHub 的 cron 排程器負責，
-   高負載時段官方明載「可能延遲數分鐘」。本模組無法消除該延遲，
-   它的職責是「定義唯一規範時間 + 解析 MODE」，不是即時觸發器。
-   若需『分秒不差』，唯一解是外部排程器/自架 cron，超出本專案範圍。
+MODE 解析優先序（resolve）：
+  1) workflow_dispatch 手動輸入：morning/verify/weekly/test/backtest
+  2) repository_dispatch 事件：morning_run/verify_run/weekly_run（去尾 _run）
+  3) [rollback] schedule cron → MODE（僅在 workflow 重新啟用 schedule 時作用）
+
+workflow 只呼叫 resolve()，不在 bash/yaml 內判斷 MODE。
 """
 
-# 規範時間：台灣（UTC+8）→ GitHub Actions 用的 UTC cron
+# 規範時間對照（台灣 UTC+8）與 rollback 用 cron 對應。
+# 正式入口為 repository_dispatch；下方 cron 僅在 workflow schedule 重新啟用時使用。
 SCHEDULE = {
     "morning": {"tw": "09:00", "cron_utc": "0 1 * * 1-5",  "desc": "早盤選股（開盤前）"},
     "verify":  {"tw": "14:45", "cron_utc": "45 6 * * 1-4", "desc": "收盤驗證（收盤後）"},
@@ -25,12 +27,7 @@ VALID_MODES = set(SCHEDULE.keys()) | {"test", "backtest"}
 
 def resolve(schedule_expr: str = "", dispatch_input: str = "",
             dispatch_action: str = "") -> str:
-    """唯一 MODE 解析點。優先序：
-       1) workflow_dispatch 手動輸入（morning/verify/weekly/test/backtest）
-       2) repository_dispatch 事件（morning_run/verify_run/weekly_run → 去尾 _run）
-       3) schedule cron → MODE
-    workflow 只呼叫此函式，不在 bash/yaml 內判斷 MODE。
-    """
+    """唯一 MODE 解析點。優先序：手動輸入 > repository_dispatch > (rollback)schedule。"""
     di = (dispatch_input or "").strip()
     if di:
         return di if is_valid_mode(di) else FALLBACK_MODE
@@ -42,7 +39,7 @@ def resolve(schedule_expr: str = "", dispatch_input: str = "",
 
 
 def resolve_mode(schedule_expr: str) -> str:
-    """由 GitHub 傳入的 cron 字串解析 MODE；無對應則回退 morning。"""
+    """[rollback] 由 cron 字串解析 MODE；無對應則回退 morning。"""
     expr = (schedule_expr or "").strip()
     for mode, meta in SCHEDULE.items():
         if meta["cron_utc"] == expr:
