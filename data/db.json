@@ -186,5 +186,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-03": {
+    "date": "2026-07-03",
+    "spy": 0.00013702513856905796,
+    "qqq": -1.7333877050142776,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "美利達",
+        "code": "9914",
+        "price": 74.8,
+        "ticker": "9914.TW",
+        "winrate": 53.1,
+        "label": null
+      },
+      {
+        "name": "台康生技",
+        "code": "6589",
+        "price": 46.9,
+        "ticker": "6589.TW",
+        "winrate": 61.1,
+        "label": null
+      },
+      {
+        "name": "聯策",
+        "code": "6658",
+        "price": 231.5,
+        "ticker": "6658.TW",
+        "winrate": 54.2,
+        "label": null
+      },
+      {
+        "name": "佳世達",
+        "code": "2352",
+        "price": 31.9,
+        "ticker": "2352.TW",
+        "winrate": 41.2,
+        "label": null
+      },
+      {
+        "name": "盛達",
+        "code": "3027",
+        "price": 21.9,
+        "ticker": "3027.TW",
+        "winrate": 40.0,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
