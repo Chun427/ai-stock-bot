@@ -1,17 +1,22 @@
+# ============================================================
+# 台股 AI 選股系統 · Production Workflow
+# ------------------------------------------------------------
+# Version : v1.1 (Production / single-entry)
+# Trigger : repository_dispatch = 唯一正式入口（外部排程器準時觸發）
+# Timing  : 由外部排程器（Google Apps Script / trigger.gs）負責準時，
+#           GitHub 僅作執行器，不負責排程。
+# Rollback: 下方 schedule 區塊保留但全註解；如需恢復 GitHub cron 備援，
+#           取消註解即可（會回到「可能延遲數小時」的行為）。
+# ============================================================
 name: 台股 AI 選股系統
 
 on:
-  # ✅ 主要：外部準時觸發（cron-job.org 等於 09:00 打 API）
+  # ── 正式入口：外部排程器打 GitHub API 觸發 ──────────────
+  #   event_type: morning_run / verify_run / weekly_run
   repository_dispatch:
     types: [morning_run, verify_run, weekly_run]
 
-  # ✅ 備援：GitHub cron（平台會延遲，僅作 fallback）
-  schedule:
-    - cron: "0 1 * * 1-5"    # 台灣 09:00 morning（週一至週五）
-    - cron: "45 6 * * 1-4"   # 台灣 14:45 verify（週一至週四）
-    - cron: "0 12 * * 5"     # 台灣 20:00 weekly（週五盤後）
-
-  # 手動測試
+  # ── 手動測試入口（Actions 頁面 Run workflow）───────────
   workflow_dispatch:
     inputs:
       mode:
@@ -20,6 +25,14 @@ on:
         default: "test"
         type: choice
         options: [morning, verify, weekly, test, backtest]
+
+  # ── [ROLLBACK ONLY] GitHub cron 備援（預設停用）─────────
+  #   GitHub schedule 為 best-effort，實測延遲 3–4 小時，故不作正式入口。
+  #   若外部排程器故障需臨時恢復，取消以下註解即可。
+  # schedule:
+  #   - cron: "0 1 * * 1-5"    # 台灣 09:00 morning（週一至週五）
+  #   - cron: "45 6 * * 1-4"   # 台灣 14:45 verify（週一至週四）
+  #   - cron: "0 12 * * 5"     # 台灣 20:00 weekly（週五盤後）
 
 permissions:
   contents: write   # 允許 commit db.json / history.csv / model.pkl 回 repo
@@ -44,11 +57,15 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      # MODE 解析唯一來源 = scheduler.py
+      #   repository_dispatch → 由 event.action（morning_run…）解析
+      #   workflow_dispatch   → 由 inputs.mode 解析
+      #   schedule(若啟用)     → 由 event.schedule 解析
       - name: Resolve MODE (single source = scheduler.py)
         run: |
           MODE=$(python scheduler.py "${{ github.event.schedule }}" "${{ github.event.inputs.mode }}" "${{ github.event.action }}")
           echo "MODE=$MODE" >> "$GITHUB_ENV"
-          echo "event=${{ github.event_name }} action=${{ github.event.action }} → MODE=$MODE（scheduler.py 唯一定義）"
+          echo "event=${{ github.event_name }} action=${{ github.event.action }} → MODE=$MODE"
 
       - name: Run
         env:
