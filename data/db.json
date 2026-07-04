@@ -235,5 +235,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-04": {
+    "date": "2026-07-04",
+    "spy": 0.00013702513856905796,
+    "qqq": -1.7333877050142776,
+    "scanner": 198,
+    "stocks": [
+      {
+        "name": "崇越",
+        "code": "5434",
+        "price": 531.0,
+        "ticker": "5434.TW",
+        "winrate": 53.3,
+        "label": null
+      },
+      {
+        "name": "聯策",
+        "code": "6658",
+        "price": 208.5,
+        "ticker": "6658.TW",
+        "winrate": 54.2,
+        "label": null
+      },
+      {
+        "name": "麗正",
+        "code": "2302",
+        "price": 52.0,
+        "ticker": "2302.TW",
+        "winrate": 43.2,
+        "label": null
+      },
+      {
+        "name": "精成科",
+        "code": "6191",
+        "price": 108.0,
+        "ticker": "6191.TW",
+        "winrate": 52.6,
+        "label": null
+      },
+      {
+        "name": "盟立",
+        "code": "2464",
+        "price": 172.5,
+        "ticker": "2464.TW",
+        "winrate": 38.7,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
