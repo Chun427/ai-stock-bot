@@ -11,7 +11,8 @@
         "price": 19.45,
         "ticker": "6116.TW",
         "winrate": 53.3,
-        "label": null
+        "label": 1,
+        "actual_pct": -6.43
       },
       {
         "name": "群創",
@@ -19,7 +20,8 @@
         "price": 67.6,
         "ticker": "3481.TW",
         "winrate": 48.5,
-        "label": null
+        "label": 1,
+        "actual_pct": 2.37
       },
       {
         "name": "承啟",
@@ -27,7 +29,8 @@
         "price": 41.6,
         "ticker": "2425.TW",
         "winrate": 47.1,
-        "label": null
+        "label": 1,
+        "actual_pct": -0.0
       },
       {
         "name": "同欣電",
@@ -35,7 +38,8 @@
         "price": 243.0,
         "ticker": "6271.TW",
         "winrate": 46.9,
-        "label": null
+        "label": 1,
+        "actual_pct": 11.93
       },
       {
         "name": "蔚華科",
@@ -43,10 +47,11 @@
         "price": 105.5,
         "ticker": "3055.TW",
         "winrate": 56.5,
-        "label": null
+        "label": 1,
+        "actual_pct": 52.13
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-06-30": {
     "date": "2026-06-30",
