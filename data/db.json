@@ -65,7 +65,8 @@
         "price": 101.0,
         "ticker": "3149.TW",
         "winrate": 59.5,
-        "label": null
+        "label": 0,
+        "actual_pct": -14.65
       },
       {
         "name": "展宇",
@@ -73,7 +74,8 @@
         "price": 20.2,
         "ticker": "1776.TW",
         "winrate": 45.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.73
       },
       {
         "name": "同欣電",
@@ -81,7 +83,8 @@
         "price": 267.0,
         "ticker": "6271.TW",
         "winrate": 43.8,
-        "label": null
+        "label": 1,
+        "actual_pct": -7.49
       },
       {
         "name": "臻鼎-KY",
@@ -89,10 +92,11 @@
         "price": 630.0,
         "ticker": "4958.TW",
         "winrate": 43.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -13.02
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-01": {
     "date": "2026-07-01",
