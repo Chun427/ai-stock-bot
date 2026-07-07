@@ -387,5 +387,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-07": {
+    "date": "2026-07-07",
+    "spy": 0.724150765029874,
+    "qqq": 1.4341891788415717,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "詠業",
+        "code": "6792",
+        "price": 65.8,
+        "ticker": "6792.TW",
+        "winrate": 60.0,
+        "label": null
+      },
+      {
+        "name": "崇越",
+        "code": "5434",
+        "price": 522.0,
+        "ticker": "5434.TW",
+        "winrate": 53.3,
+        "label": null
+      },
+      {
+        "name": "新纖",
+        "code": "1409",
+        "price": 30.25,
+        "ticker": "1409.TW",
+        "winrate": 51.7,
+        "label": null
+      },
+      {
+        "name": "聯成",
+        "code": "1313",
+        "price": 13.55,
+        "ticker": "1313.TW",
+        "winrate": 63.2,
+        "label": null
+      },
+      {
+        "name": "昇陽半導體",
+        "code": "8028",
+        "price": 330.5,
+        "ticker": "8028.TW",
+        "winrate": 48.3,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
