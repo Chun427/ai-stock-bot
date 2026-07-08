@@ -110,7 +110,8 @@
         "price": 1490.0,
         "ticker": "5269.TW",
         "winrate": 40.0,
-        "label": null
+        "label": 0,
+        "actual_pct": 2.35
       },
       {
         "name": "兆豐金",
@@ -118,7 +119,8 @@
         "price": 46.4,
         "ticker": "2886.TW",
         "winrate": 38.5,
-        "label": null
+        "label": 0,
+        "actual_pct": 0.86
       },
       {
         "name": "安普新",
@@ -126,7 +128,8 @@
         "price": 31.9,
         "ticker": "6743.TW",
         "winrate": 37.0,
-        "label": null
+        "label": 0,
+        "actual_pct": -3.61
       },
       {
         "name": "洋基工程",
@@ -134,7 +137,8 @@
         "price": 757.0,
         "ticker": "6691.TW",
         "winrate": 43.5,
-        "label": null
+        "label": 0,
+        "actual_pct": -5.55
       },
       {
         "name": "威宏-KY",
@@ -142,10 +146,11 @@
         "price": 42.25,
         "ticker": "8442.TW",
         "winrate": 66.7,
-        "label": null
+        "label": 1,
+        "actual_pct": 9.47
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-02": {
     "date": "2026-07-02",
