@@ -440,5 +440,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-08": {
+    "date": "2026-07-08",
+    "spy": -0.44551096782159405,
+    "qqq": -1.85246873533641,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "興勤",
+        "code": "2428",
+        "price": 309.5,
+        "ticker": "2428.TW",
+        "winrate": 48.6,
+        "label": null
+      },
+      {
+        "name": "中石化",
+        "code": "1314",
+        "price": 9.77,
+        "ticker": "1314.TW",
+        "winrate": 59.1,
+        "label": null
+      },
+      {
+        "name": "谷崧",
+        "code": "3607",
+        "price": 16.2,
+        "ticker": "3607.TW",
+        "winrate": 58.3,
+        "label": null
+      },
+      {
+        "name": "禾伸堂",
+        "code": "3026",
+        "price": 867.0,
+        "ticker": "3026.TW",
+        "winrate": 45.9,
+        "label": null
+      },
+      {
+        "name": "旭隼",
+        "code": "6409",
+        "price": 1185.0,
+        "ticker": "6409.TW",
+        "winrate": 57.1,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
