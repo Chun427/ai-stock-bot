@@ -494,5 +494,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-09": {
+    "date": "2026-07-09",
+    "spy": -0.2817238676629863,
+    "qqq": 0.28332742996159954,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "和益",
+        "code": "1709",
+        "price": 23.95,
+        "ticker": "1709.TW",
+        "winrate": 63.0,
+        "label": null
+      },
+      {
+        "name": "宏旭-KY",
+        "code": "2243",
+        "price": 53.5,
+        "ticker": "2243.TW",
+        "winrate": 52.0,
+        "label": null
+      },
+      {
+        "name": "新纖",
+        "code": "1409",
+        "price": 29.25,
+        "ticker": "1409.TW",
+        "winrate": 50.0,
+        "label": null
+      },
+      {
+        "name": "大亞",
+        "code": "1609",
+        "price": 39.5,
+        "ticker": "1609.TW",
+        "winrate": 48.3,
+        "label": null
+      },
+      {
+        "name": "研揚",
+        "code": "6579",
+        "price": 172.5,
+        "ticker": "6579.TW",
+        "winrate": 48.3,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
