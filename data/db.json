@@ -548,5 +548,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-10": {
+    "date": "2026-07-10",
+    "spy": 0.8142795337428232,
+    "qqq": 1.664234062582648,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "威強電",
+        "code": "3022",
+        "price": 89.0,
+        "ticker": "3022.TW",
+        "winrate": 55.2,
+        "label": null
+      },
+      {
+        "name": "中石化",
+        "code": "1314",
+        "price": 8.9,
+        "ticker": "1314.TW",
+        "winrate": 62.5,
+        "label": null
+      },
+      {
+        "name": "台汽電",
+        "code": "8926",
+        "price": 76.0,
+        "ticker": "8926.TW",
+        "winrate": 48.6,
+        "label": null
+      },
+      {
+        "name": "和成",
+        "code": "1810",
+        "price": 23.85,
+        "ticker": "1810.TW",
+        "winrate": 46.7,
+        "label": null
+      },
+      {
+        "name": "聯邦銀",
+        "code": "2838",
+        "price": 23.8,
+        "ticker": "2838.TW",
+        "winrate": 40.7,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
