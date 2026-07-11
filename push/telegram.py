@@ -37,10 +37,18 @@ def push(text: str) -> str:
         try:
             r = requests.post(url, json=body, timeout=config.NET_TIMEOUT)
             log.info(f"[TG] HTTP {r.status_code} (attempt {attempt})")
+            # 成功條件強化：HTTP 200 + Telegram 回應 body ok=true
+            # （Telegram 偶爾回 200 但 {"ok":false}，僅看 status 會誤判為成功）
+            ok = False
             if r.status_code == 200:
+                try:
+                    ok = bool(r.json().get("ok"))
+                except Exception:  # noqa: BLE001  body 非 JSON → 視為失敗
+                    ok = False
+            if ok:
                 log.ok("[TG] 發送成功")
                 return "success"
-            log.warning(f"[TG] 非 200：{r.text[:160]}")
+            log.warning(f"[TG] 未成功：status={r.status_code} body={r.text[:160]}")
         except Exception as e:  # noqa: BLE001
             log.warning(f"[TG] 例外 attempt {attempt}: {e}")
         if attempt < config.TG_RETRY:
