@@ -1,29 +1,38 @@
 # CHANGELOG
 
-## [Push Hardening] — Telegram success validation
+## [Performance Metric Alignment] — 績效計算與交易規則對齊
+
+### 問題（Root Cause）
+`core/verifier.py` 的**成功判定**假設「觸 +3% 停利 / 觸 −1.5% 停損」即出場，
+但 **`actual_pct` 一律以第 5 日收盤價計算**，造成策略規則與績效統計為兩套邏輯。
+
+實際出現的矛盾（真實資料）：
+```
+彩晶 6116   判定 ✅命中，但記錄報酬 −6.43%
+同欣電 6271 判定 ✅命中，但記錄報酬 −7.49%
+美利達 9914 判定 ✅命中，但記錄報酬 −2.67%
+```
+若持續累積，Dashboard 與後續策略比較將建立在錯誤數字上。
 
 ### Changed
-- `push/telegram.py`: 成功判定由 `HTTP 200` 改為 `HTTP 200 AND response.json()["ok"] == True`。
-  Telegram API 偶爾回 200 但 body `{"ok":false}`（例如 chat 被封鎖、參數錯誤），
-  舊邏輯會誤判為成功；新邏輯正確判為失敗並觸發重試 / 回報 fail。
+- `core/verifier.py` → `_label_and_actual()`：`actual_pct` 依**實際出場方式**計算
+  1. 先觸停利（High ≥ +3%）→ `actual_pct = +3.0%`
+  2. 先觸停損（Low ≤ −1.5%）→ `actual_pct = −1.5%`
+  3. 5 日內皆未觸發 → `actual_pct = 第 5 日收盤` 相對買價
+  - 停損優先於停利（同日先檢查 Low，與原邏輯一致）
 
-### Preserved
-- retry ×4（指數退避 2/4/8s）
-- timeout（NET_TIMEOUT）
-- 4096 字元截斷
-- fail-safe（例外不外拋）
-- 回傳值語意：'success' / 'fail' / 'not_configured'
+### Unchanged（本次全部凍結）
+- 交易門檻：`HIT_THRESHOLD=+3%`、`STOP_THRESHOLD=−1.5%`、`VERIFY_WINDOW=5`
+- `label` 判定邏輯（命中率不變，仍為既有基準）
+- scanner / feature engineering / RandomForest / scorer / 排名邏輯
+- formatter（推播格式）/ workflow / scheduler / GAS / push
 
-### Not Changed (Regression-protected)
-- scanner / scorer / model / filter / formatter
-- main.py / config.py / scheduler.py
-- .github/workflows/stock.yml
-- push/line.py
-- GAS trigger.gs
+### 重要說明（措辭）
+本次**不是策略優化、不是提高收益、不是調模型**。
+> 績效計算方式與既有交易規則一致，因此 KPI 更能反映策略實際執行結果。
 
-### Reference
-- 以 stock-notify-bot 的 `notify/telegram_notifier.py` 作為 Notification Reliability
-  Benchmark，僅 Merge「response ok 驗證」此一項優化，未搬移其架構。
+以前：錯誤記帳；現在：正確記帳。**策略本身沒有變強。**
 
-### Runtime Verification (pending)
-- GAS `testNow` → repository_dispatch → Actions → main.py → Telegram → 手機通知
+### 影響面
+`actual_pct` 僅由 `verifier` 產生、`formatter.verify` 顯示；
+**不寫入 `history.csv`、不進入 ML 訓練**（訓練僅使用 `target_label`）→ 模型零污染。
