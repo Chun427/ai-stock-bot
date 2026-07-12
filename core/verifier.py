@@ -21,7 +21,15 @@ log = get_logger("verifier")
 
 
 def _label_and_actual(df, buy_price):
-    """回傳 (label:int, actual_pct:float, mature:bool)。"""
+    """回傳 (label:int, actual_pct:float, mature:bool)。
+
+    績效與交易規則對齊（Performance Metric Alignment）：
+      1) 先觸停利 High ≥ +3%  → actual_pct = +3%（於停利點出場）
+      2) 先觸停損 Low  ≤ -1.5% → actual_pct = -1.5%（於停損點出場）
+      3) 5 日內皆未觸發        → actual_pct = 第 5 日 close 相對買價
+    停損優先於停利（同日先檢查 Low，與原邏輯一致）。
+    label 判定規則不變：命中且未先停損 → 1，否則 0。
+    """
     highs = list(df["High"].dropna())
     lows = list(df["Low"].dropna())
     closes = list(df["Close"].dropna())
@@ -41,7 +49,14 @@ def _label_and_actual(df, buy_price):
             hit = True
             break
     label = 1 if (hit and not stopped) else 0
-    actual_pct = (closes[min(n, len(closes)) - 1] / buy_price - 1) * 100
+
+    # 依實際出場方式計算報酬（模擬真實交易）
+    if stopped:
+        actual_pct = config.STOP_THRESHOLD * 100          # 停損出場
+    elif hit:
+        actual_pct = config.HIT_THRESHOLD * 100           # 停利出場
+    else:
+        actual_pct = (closes[min(n, len(closes)) - 1] / buy_price - 1) * 100  # 時間出場
     return label, round(actual_pct, 2), mature
 
 
