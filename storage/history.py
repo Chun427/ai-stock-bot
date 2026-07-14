@@ -27,12 +27,32 @@ def _ensure():
 
 
 def append_features(rows: list) -> bool:
-    """rows: list[dict]，key 對應 HISTORY_HEADER（target_label 可省略=空）。"""
+    """rows: list[dict]，key 對應 HISTORY_HEADER（target_label 可省略=空）。
+
+    Gate-A S1：寫入前以 (date, code) 去重，已存在者跳過（不覆寫、不修改既有列）。
+    """
     try:
         _ensure()
+        existing = {
+            ((r.get("date") or "").strip(), (r.get("code") or "").strip())
+            for r in read_all()
+        }
+        to_write, skipped = [], 0
+        for r in rows:
+            key = (str(r.get("date", "")).strip(), str(r.get("code", "")).strip())
+            if key in existing:
+                skipped += 1
+                log.warning(f"[dedup] 已存在，跳過寫入 date={key[0]} code={key[1]}")
+                continue
+            existing.add(key)      # 同批次內也去重
+            to_write.append(r)
+        if skipped:
+            log.info(f"[dedup] 本次跳過 {skipped} 列重複資料")
+        if not to_write:
+            return True
         with open(config.HISTORY_PATH, "a", newline="", encoding="utf-8") as f:
             w = csv.DictWriter(f, fieldnames=config.HISTORY_HEADER)
-            for r in rows:
+            for r in to_write:
                 w.writerow({k: r.get(k, "") for k in config.HISTORY_HEADER})
         return True
     except Exception as e:  # noqa: BLE001
