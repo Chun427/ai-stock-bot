@@ -44,12 +44,30 @@ def run_test():
 # ============================================================
 # MODE: morning
 # ============================================================
+def _is_trading_day(d: datetime = None) -> bool:
+    """Gate-A S2：Python 端交易日判斷（最後防線，不依賴 GAS）。
+
+    目前規則：週一~週五為交易日。
+    國定假日尚未納入（已知限制，需另行提案）。
+    """
+    d = d or datetime.now()
+    return d.weekday() < 5
+
+
 def run_morning():
     from core import market_data, scanner, filter as tfilter, scorer
     from ml import ml_model
 
     today_slash = datetime.now().strftime("%Y/%m/%d")
     today_dash = datetime.now().strftime("%Y-%m-%d")
+
+    # ── Gate-A S2：Trading Day Guard（唯一新增；非交易日不執行、不寫入）──
+    if not _is_trading_day():
+        log.warning(f"[guard] 非交易日（{today_dash}），略過 morning：不掃描、不推播、不寫入 history")
+        REPORT["scanner"] = "skipped_non_trading_day"
+        REPORT["final"] = 0
+        return
+    # ── 以下流程完全不變 ──────────────────────────────────────
 
     spy, qqq, crashed = market_data.get_us_market()
     if crashed:
