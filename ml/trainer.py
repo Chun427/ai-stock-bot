@@ -30,7 +30,32 @@ def _load_xy():
 
 
 def train():
-    """回傳訓練後的 model 或 None。"""
+    """回傳訓練後的 model 或 None。
+
+    Gate-A S5（Training Gate）：訓練前先檢查資料品質。
+      - 不合格 → 停止訓練 + 回報原因（回傳 None）
+      - 禁止：自動修資料 / 自動刪資料 / 自動補資料 / 修改 label / 修改 feature
+    演算法、超參數、特徵集、ML_MIN_LABELS 門檻皆不變。
+    """
+    # ── Training Gate（唯一新增；僅阻擋，不修改任何資料）──
+    try:
+        import data_validator
+        res = data_validator.validate()
+        if not res.get("passed"):
+            log.error(
+                "[training-gate] 資料品質檢查未通過，拒絕訓練："
+                f"重複鍵={len(res.get('duplicates', []))} "
+                f"非交易日={len(res.get('non_trading_days', []))} "
+                f"缺值={len(res.get('missing_values', []))} "
+                f"數值異常={len(res.get('invalid_numeric', []))}"
+            )
+            return None
+        log.info("[training-gate] 資料品質檢查通過")
+    except Exception as e:  # noqa: BLE001  validator 失效不得靜默
+        log.error(f"[training-gate] 資料品質檢查執行失敗，拒絕訓練：{e}")
+        return None
+    # ── 以下訓練邏輯完全不變 ──────────────────────────
+
     X, y = _load_xy()
     n = len(y)
     if n < config.ML_MIN_LABELS:
