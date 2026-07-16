@@ -646,5 +646,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-16": {
+    "date": "2026-07-16",
+    "spy": 0.3819144358387927,
+    "qqq": -0.2709516875899598,
+    "scanner": 127,
+    "stocks": [
+      {
+        "name": "和益",
+        "code": "1709",
+        "price": 27.35,
+        "ticker": "1709.TW",
+        "winrate": 59.4,
+        "label": null
+      },
+      {
+        "name": "柏文",
+        "code": "8462",
+        "price": 161.0,
+        "ticker": "8462.TW",
+        "winrate": 66.7,
+        "label": null
+      },
+      {
+        "name": "巨大",
+        "code": "9921",
+        "price": 80.0,
+        "ticker": "9921.TW",
+        "winrate": 42.9,
+        "label": null
+      },
+      {
+        "name": "友訊",
+        "code": "2332",
+        "price": 23.55,
+        "ticker": "2332.TW",
+        "winrate": 42.4,
+        "label": null
+      },
+      {
+        "name": "臻鼎-KY",
+        "code": "4958",
+        "price": 618.0,
+        "ticker": "4958.TW",
+        "winrate": 41.2,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
