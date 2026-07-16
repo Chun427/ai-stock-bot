@@ -218,7 +218,8 @@
         "price": 66.7,
         "ticker": "6792.TW",
         "winrate": 60.0,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "云辰",
@@ -226,7 +227,8 @@
         "price": 13.25,
         "ticker": "2390.TW",
         "winrate": 55.2,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "台康生技",
@@ -234,7 +236,8 @@
         "price": 49.45,
         "ticker": "6589.TW",
         "winrate": 63.2,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "大亞",
@@ -242,7 +245,8 @@
         "price": 40.0,
         "ticker": "1609.TW",
         "winrate": 48.3,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "聯策",
@@ -250,10 +254,11 @@
         "price": 208.5,
         "ticker": "6658.TW",
         "winrate": 54.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-04": {
     "date": "2026-07-04",
@@ -267,7 +272,8 @@
         "price": 531.0,
         "ticker": "5434.TW",
         "winrate": 53.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "聯策",
@@ -275,7 +281,8 @@
         "price": 208.5,
         "ticker": "6658.TW",
         "winrate": 54.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "麗正",
@@ -283,7 +290,8 @@
         "price": 52.0,
         "ticker": "2302.TW",
         "winrate": 43.2,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "精成科",
@@ -291,7 +299,8 @@
         "price": 108.0,
         "ticker": "6191.TW",
         "winrate": 52.6,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "盟立",
@@ -299,10 +308,11 @@
         "price": 172.5,
         "ticker": "2464.TW",
         "winrate": 38.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-05": {
     "date": "2026-07-05",
@@ -316,7 +326,8 @@
         "price": 531.0,
         "ticker": "5434.TW",
         "winrate": 53.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "聯策",
@@ -324,7 +335,8 @@
         "price": 208.5,
         "ticker": "6658.TW",
         "winrate": 54.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "麗正",
@@ -332,7 +344,8 @@
         "price": 52.0,
         "ticker": "2302.TW",
         "winrate": 43.2,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "精成科",
@@ -340,7 +353,8 @@
         "price": 108.0,
         "ticker": "6191.TW",
         "winrate": 52.6,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "盟立",
@@ -348,10 +362,11 @@
         "price": 172.5,
         "ticker": "2464.TW",
         "winrate": 38.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-06": {
     "date": "2026-07-06",
@@ -365,7 +380,8 @@
         "price": 531.0,
         "ticker": "5434.TW",
         "winrate": 53.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "聯策",
@@ -373,7 +389,8 @@
         "price": 208.5,
         "ticker": "6658.TW",
         "winrate": 54.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "麗正",
@@ -381,7 +398,8 @@
         "price": 52.0,
         "ticker": "2302.TW",
         "winrate": 43.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "精成科",
@@ -389,7 +407,8 @@
         "price": 108.0,
         "ticker": "6191.TW",
         "winrate": 52.6,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "盟立",
@@ -397,10 +416,11 @@
         "price": 172.5,
         "ticker": "2464.TW",
         "winrate": 38.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-07": {
     "date": "2026-07-07",
@@ -414,7 +434,8 @@
         "price": 65.8,
         "ticker": "6792.TW",
         "winrate": 60.0,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "崇越",
@@ -422,7 +443,8 @@
         "price": 522.0,
         "ticker": "5434.TW",
         "winrate": 53.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "新纖",
@@ -430,7 +452,8 @@
         "price": 30.25,
         "ticker": "1409.TW",
         "winrate": 51.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "聯成",
@@ -438,7 +461,8 @@
         "price": 13.55,
         "ticker": "1313.TW",
         "winrate": 63.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "昇陽半導體",
@@ -446,10 +470,11 @@
         "price": 330.5,
         "ticker": "8028.TW",
         "winrate": 48.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-08": {
     "date": "2026-07-08",
@@ -463,7 +488,8 @@
         "price": 309.5,
         "ticker": "2428.TW",
         "winrate": 48.6,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "中石化",
@@ -471,7 +497,8 @@
         "price": 9.77,
         "ticker": "1314.TW",
         "winrate": 59.1,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "谷崧",
@@ -479,7 +506,8 @@
         "price": 16.2,
         "ticker": "3607.TW",
         "winrate": 58.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "禾伸堂",
@@ -487,7 +515,8 @@
         "price": 867.0,
         "ticker": "3026.TW",
         "winrate": 45.9,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "旭隼",
@@ -495,10 +524,11 @@
         "price": 1185.0,
         "ticker": "6409.TW",
         "winrate": 57.1,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-09": {
     "date": "2026-07-09",
@@ -512,7 +542,8 @@
         "price": 23.95,
         "ticker": "1709.TW",
         "winrate": 63.0,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "宏旭-KY",
@@ -520,7 +551,8 @@
         "price": 53.5,
         "ticker": "2243.TW",
         "winrate": 52.0,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "新纖",
@@ -528,7 +560,8 @@
         "price": 29.25,
         "ticker": "1409.TW",
         "winrate": 50.0,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "大亞",
@@ -536,7 +569,8 @@
         "price": 39.5,
         "ticker": "1609.TW",
         "winrate": 48.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "研揚",
@@ -544,10 +578,11 @@
         "price": 172.5,
         "ticker": "6579.TW",
         "winrate": 48.3,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-10": {
     "date": "2026-07-10",
