@@ -596,7 +596,8 @@
         "price": 89.0,
         "ticker": "3022.TW",
         "winrate": 55.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "中石化",
@@ -604,7 +605,8 @@
         "price": 8.9,
         "ticker": "1314.TW",
         "winrate": 62.5,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "台汽電",
@@ -612,7 +614,8 @@
         "price": 76.0,
         "ticker": "8926.TW",
         "winrate": 48.6,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "和成",
@@ -620,7 +623,8 @@
         "price": 23.85,
         "ticker": "1810.TW",
         "winrate": 46.7,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "聯邦銀",
@@ -628,10 +632,11 @@
         "price": 23.8,
         "ticker": "2838.TW",
         "winrate": 40.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-15": {
     "date": "2026-07-15",
