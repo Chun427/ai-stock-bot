@@ -735,5 +735,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-21": {
+    "date": "2026-07-21",
+    "spy": -0.19322546744660052,
+    "qqq": 0.1049833101992581,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "聯友金屬-創",
+        "code": "7610",
+        "price": 2170.0,
+        "ticker": "7610.TW",
+        "winrate": 56.8,
+        "label": null
+      },
+      {
+        "name": "雷虎",
+        "code": "8033",
+        "price": 204.5,
+        "ticker": "8033.TW",
+        "winrate": 64.7,
+        "label": null
+      },
+      {
+        "name": "南亞",
+        "code": "1303",
+        "price": 186.5,
+        "ticker": "1303.TW",
+        "winrate": 50.0,
+        "label": null
+      },
+      {
+        "name": "巨大",
+        "code": "9921",
+        "price": 83.9,
+        "ticker": "9921.TW",
+        "winrate": 46.2,
+        "label": null
+      },
+      {
+        "name": "台塑化",
+        "code": "6505",
+        "price": 77.7,
+        "ticker": "6505.TW",
+        "winrate": 42.9,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
