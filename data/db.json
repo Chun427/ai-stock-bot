@@ -784,5 +784,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-22": {
+    "date": "2026-07-22",
+    "spy": 0.8856366018608064,
+    "qqq": 1.8547213156642428,
+    "scanner": 143,
+    "stocks": [
+      {
+        "name": "正新",
+        "code": "2105",
+        "price": 32.25,
+        "ticker": "2105.TW",
+        "winrate": 44.0,
+        "label": null
+      },
+      {
+        "name": "冠德",
+        "code": "2520",
+        "price": 35.7,
+        "ticker": "2520.TW",
+        "winrate": 43.8,
+        "label": null
+      },
+      {
+        "name": "台勝科",
+        "code": "3532",
+        "price": 433.5,
+        "ticker": "3532.TW",
+        "winrate": 40.0,
+        "label": null
+      },
+      {
+        "name": "利奇",
+        "code": "1517",
+        "price": 11.5,
+        "ticker": "1517.TW",
+        "winrate": 40.0,
+        "label": null
+      },
+      {
+        "name": "ABC-KY",
+        "code": "6598",
+        "price": 26.65,
+        "ticker": "6598.TW",
+        "winrate": 36.8,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
