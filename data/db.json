@@ -650,7 +650,8 @@
         "price": 81.3,
         "ticker": "9921.TW",
         "winrate": 42.9,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "臻鼎-KY",
@@ -658,7 +659,8 @@
         "price": 629.0,
         "ticker": "4958.TW",
         "winrate": 41.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "友訊",
@@ -666,7 +668,8 @@
         "price": 24.05,
         "ticker": "2332.TW",
         "winrate": 40.6,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "融程電",
@@ -674,7 +677,8 @@
         "price": 181.5,
         "ticker": "3416.TW",
         "winrate": 47.6,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "華廣",
@@ -682,10 +686,11 @@
         "price": 62.2,
         "ticker": "4737.TW",
         "winrate": 46.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-16": {
     "date": "2026-07-16",
