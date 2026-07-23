@@ -838,5 +838,54 @@
       }
     ],
     "verified": false
+  },
+  "PRED_2026-07-23": {
+    "date": "2026-07-23",
+    "spy": -0.13636917526039793,
+    "qqq": -0.5105992167196205,
+    "scanner": 230,
+    "stocks": [
+      {
+        "name": "中碳",
+        "code": "1723",
+        "price": 85.7,
+        "ticker": "1723.TW",
+        "winrate": 51.9,
+        "label": null
+      },
+      {
+        "name": "漢翔",
+        "code": "2634",
+        "price": 64.4,
+        "ticker": "2634.TW",
+        "winrate": 50.0,
+        "label": null
+      },
+      {
+        "name": "宏璟",
+        "code": "2527",
+        "price": 49.05,
+        "ticker": "2527.TW",
+        "winrate": 50.0,
+        "label": null
+      },
+      {
+        "name": "華勝-KY",
+        "code": "2248",
+        "price": 63.6,
+        "ticker": "2248.TW",
+        "winrate": 46.2,
+        "label": null
+      },
+      {
+        "name": "上海商銀",
+        "code": "5876",
+        "price": 45.0,
+        "ticker": "5876.TW",
+        "winrate": 45.2,
+        "label": null
+      }
+    ],
+    "verified": false
   }
 }
