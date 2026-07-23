@@ -704,7 +704,8 @@
         "price": 27.35,
         "ticker": "1709.TW",
         "winrate": 59.4,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "柏文",
@@ -712,7 +713,8 @@
         "price": 161.0,
         "ticker": "8462.TW",
         "winrate": 66.7,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "巨大",
@@ -720,7 +722,8 @@
         "price": 80.0,
         "ticker": "9921.TW",
         "winrate": 42.9,
-        "label": null
+        "label": 1,
+        "actual_pct": 3.0
       },
       {
         "name": "友訊",
@@ -728,7 +731,8 @@
         "price": 23.55,
         "ticker": "2332.TW",
         "winrate": 42.4,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       },
       {
         "name": "臻鼎-KY",
@@ -736,10 +740,11 @@
         "price": 618.0,
         "ticker": "4958.TW",
         "winrate": 41.2,
-        "label": null
+        "label": 0,
+        "actual_pct": -1.5
       }
     ],
-    "verified": false
+    "verified": true
   },
   "PRED_2026-07-21": {
     "date": "2026-07-21",
